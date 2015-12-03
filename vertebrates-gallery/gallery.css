@@ -1,0 +1,53 @@
+body {
+  background-color: #EFEFEF;
+}
+
+.page-header {
+  border-bottom: 1px solid #5D8192;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color: #5D8192;
+}
+.navbar-default .navbar-toggle {
+    border-color: #5D8192;
+}
+
+.navbar-default {
+  background-color: #83AFC3;
+  border-color: #83AFC3;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #DEDEDE;
+}
+
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+  color: #FFF;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  color: #FFF;
+  background-color: #5D8192;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #EFEFEF;
+}
+
+.jumbotron {
+  background-color: #D1DEE4;
+}
+
+.well {
+  background-color: #D1DEE4;
+  border: 1px solid #5D8192;
+}
+
+.modal-content {
+  background-color: #EFEFEF;
+}
+
+.modal-header {
+  border-bottom: 1px solid #5D8192;
+}

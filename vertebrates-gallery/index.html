@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/handlebars-v3.0.3.js"></script>
+    <script src="js/bootstrap-custom.js"></script>
+
+    <script src="AnimalsData.js"></script>
+    <script src="gallery.js"></script>
+
+    <link href="css/bootstrap-custom.css" rel="stylesheet">
+    <link href="gallery.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="nav navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main_navbar" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="main_navbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+            <li><a href="about.html"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <header class="jumbotron">
+      <div class="container">
+        <div id="vertebrates"></div>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row well">
+        <div class="col-xs-12 col-sm-3">
+          <div id="categories"></div>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+          <div id="animals"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="animal-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label"></div>
+    
+    <script id="vertebrates-template" type="text/x-handlebars-template">
+      <div class="row">
+        <div class="col-xs-12 col-sm-9">
+          <h1 class="page-header">{{name}}</h1>
+          <p class="text-justify">{{description}}</p>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <img class="img-responsive" src="{{image}}" alt="image-vertebrates"/>
+        </div>
+      </div>
+    </script>
+ 
+    <script id="categories-template" type="text/x-handlebars-template">
+      <div id="carousel-categories" class="carousel-vertical slide" data-ride="carousel" data-interval="false" data-layout="vertical">
+        <div class="carousel-vertical-inner" role="listbox">
+          {{#each category}}
+          <div class="item {{#if @first }}active{{/if}}" data-category="{{@index}}">
+            <img class="img-responsive center-block" src="{{image}}" alt="image-category"/>
+          </div>
+          {{/each}}
+
+        <a class="top carousel-vertical-control" href="#carousel-categories" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="bottom carousel-vertical-control" href="#carousel-categories" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </script>
+ 
+    <script id="animals-template" type="text/x-handlebars-template">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="page-header">{{name}}</h2>
+          <p>{{description}}</p>
+          <br/>
+          <br/>
+        </div>
+      </div>
+      <div class="row">
+        {{#each animals}}
+          <div class="col-xs-12 col-sm-4">
+            <h4>{{name}}</h4>
+            <p>{{substring description}}</p>
+            <p><button type="button" class="btn btn-primary btn-xs" href="#"  data-toggle="modal" data-target="#animal-modal" data-category="{{@root.id}}" data-animal="{{@index}}">More &raquo;</button></p>
+          </div>
+        {{/each}}
+      </div>
+    </script>
+    
+    <script id="animal-template" type="text/x-handlebars-template">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modal-label">{{name}}</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <p  class="text-justify">{{description}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6">
+                <img class="img-responsive center-block" src="{{image1}}" alt="image1"/>
+              </div>
+              <div class="col-xs-6">
+                <img class="img-responsive center-block" src="{{image2}}" alt="image2"/>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        </div>
+    </script>
+  </body>
+</html>

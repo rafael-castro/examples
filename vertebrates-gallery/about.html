@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap-custom.js"></script>
+
+    <link href="css/bootstrap-custom.css" rel="stylesheet">
+    <link href="gallery.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="nav navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main_navbar" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="main_navbar">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+            <li class="active"><a href="about.html"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <br/>
+    <div class="container well">
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="text-justify">Beside the implementation I did on gallery.js and gallery.css to implement the data-driven web site, I also customized the carousel component in bootstrap to use a vertical carousel. Below are the changes I did.</p>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <p class="text-justify">I had to change the style of the carousel using a new class, carousel-vertical, to allow a vertical translation and to layout the button at the top and at the botton and also to apply the gradients correctly.</p>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+          <pre class="pre-scrollable">
+.carousel-vertical {
+  position: relative;
+}
+.carousel-vertical-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.carousel-vertical-inner &gt; .item {
+  position: relative;
+  display: none;
+  -webkit-transition: .6s ease-in-out top;
+       -o-transition: .6s ease-in-out top;
+          transition: .6s ease-in-out top;
+}
+.carousel-vertical-inner &gt; .item &gt; img,
+.carousel-vertical-inner &gt; .item &gt; a &gt; img {
+  line-height: 1;
+}
+@media all and (transform-3d), (-webkit-transform-3d) {
+  .carousel-vertical-inner &gt; .item {
+    -webkit-transition: -webkit-transform .6s ease-in-out;
+         -o-transition:      -o-transform .6s ease-in-out;
+            transition:         transform .6s ease-in-out;
+
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+            perspective: 1000px;
+  }
+  .carousel-vertical-inner &gt; .item.next,
+  .carousel-vertical-inner &gt; .item.active.bottom {
+    top: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+            transform: translate3d(0, 100%, 0);
+  }
+  .carousel-vertical-inner &gt; .item.prev,
+  .carousel-vertical-inner &gt; .item.active.top {
+    top: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+  }
+  .carousel-vertical-inner &gt; .item.next.top,
+  .carousel-vertical-inner &gt; .item.prev.bottom,
+  .carousel-vertical-inner &gt; .item.active {
+    top: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+}
+.carousel-vertical-inner &gt; .active,
+.carousel-vertical-inner &gt; .next,
+.carousel-vertical-inner &gt; .prev {
+  display: block;
+}
+.carousel-vertical-inner &gt; .active {
+  top: 0;
+}
+.carousel-vertical-inner &gt; .next,
+.carousel-vertical-inner &gt; .prev {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.carousel-vertical-inner &gt; .next {
+  top: 100%;
+}
+.carousel-vertical-inner &gt; .prev {
+  top: -100%;
+}
+.carousel-vertical-inner &gt; .next.top,
+.carousel-vertical-inner &gt; .prev.bottom {
+  top: 0;
+}
+.carousel-vertical-inner &gt; .active.top {
+  top: -100%;
+}
+.carousel-vertical-inner &gt; .active.bottom {
+  top: 100%;
+}
+.carousel-vertical-control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 15%;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+.carousel-vertical-control.top {
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
+  background-image:      -o-linear-gradient(top, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
+  background-image: -webkit-gradient(linear, top left, bottom left, from(rgba(0, 0, 0, .5)), to(rgba(0, 0, 0, .0001)));
+  background-image:         linear-gradient(to bottom, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+  background-repeat: repeat-y;
+}
+.carousel-vertical-control.bottom {
+  bottom: 0;
+  top: auto;
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, .0001) 0%, rgba(0, 0, 0, .5) 100%);
+  background-image:      -o-linear-gradient(top, rgba(0, 0, 0, .0001) 0%, rgba(0, 0, 0, .5) 100%);
+  background-image: -webkit-gradient(linear, top left, bottom left, from(rgba(0, 0, 0, .0001)), to(rgba(0, 0, 0, .5)));
+  background-image:         linear-gradient(to bottom, rgba(0, 0, 0, .0001) 0%, rgba(0, 0, 0, .5) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+  background-repeat: repeat-y;
+}
+.carousel-vertical-control:hover,
+.carousel-vertical-control:focus {
+  color: #fff;
+  text-decoration: none;
+  filter: alpha(opacity=90);
+  outline: 0;
+  opacity: .9;
+}
+.carousel-vertical-control .icon-prev,
+.carousel-vertical-control .icon-next,
+.carousel-vertical-control .glyphicon-chevron-up,
+.carousel-vertical-control .glyphicon-chevron-down {
+  position: absolute;
+  left: 50%;
+  z-index: 5;
+  display: inline-block;
+  margin-left: -10px;
+}
+.carousel-vertical-control .icon-prev,
+.carousel-vertical-control .glyphicon-chevron-up {
+  top: 5px;
+  bottom: auto;
+}
+.carousel-vertical-control .icon-next,
+.carousel-vertical-control .glyphicon-chevron-down {
+  top: auto;
+  bottom: 5px;
+}
+.carousel-vertical-control .icon-prev,
+.carousel-vertical-control .icon-next {
+  width: 20px;
+  height: 20px;
+  font-family: serif;
+  line-height: 1;
+}
+.carousel-vertical-control .icon-prev:before {
+  content: '\2039';
+}
+.carousel-vertical-control .icon-next:before {
+  content: '\203a';
+}
+.carousel-vertical-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 15;
+  width: 60%;
+  padding-left: 0;
+  margin-left: -30%;
+  text-align: center;
+  list-style: none;
+}
+.carousel-vertical-indicators li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: #000 \9;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid #fff;
+  border-radius: 10px;
+}
+.carousel-vertical-indicators .active {
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  background-color: #fff;
+}
+.carousel-vertical-caption {
+  position: absolute;
+  right: 15%;
+  bottom: 20px;
+  left: 15%;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+}
+.carousel-vertical-caption .btn {
+  text-shadow: none;
+}
+@media screen and (min-width: 768px) {
+  .carousel-vertical-control .glyphicon-chevron-up,
+  .carousel-vertical-control .glyphicon-chevron-down,
+  .carousel-vertical-control .icon-prev,
+  .carousel-vertical-control .icon-next {
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+  }
+  .carousel-vertical-control .glyphicon-chevron-up,
+  .carousel-vertical-control .icon-prev {
+    top: 5px;
+    bottom: auto;
+  }
+  .carousel-vertical-control .glyphicon-chevron-down,
+  .carousel-vertical-control .icon-next {
+    top: auto;
+    bottom: 5px;
+  }
+  .carousel-vertical-caption {
+    right: 20%;
+    left: 20%;
+    padding-bottom: 30px;
+  }
+  .carousel-vertical-indicators {
+    bottom: 20px;
+  }
+}
+...
+          </pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <p class="text-justify">I added a new option in the carousel called layout. This will allow to configure the vertical carousel.</p>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+          <pre class="pre-scrollable">
+...
+Carousel.DEFAULTS = {
+  interval: 5000,
+  pause: 'hover',
+  wrap: true,
+  keyboard: true,
+  layout: 'horizontal'
+}
+...
+          </pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <p class="text-justify">The slide function is invoked to change the image in the carousel. I used the new option, layout, to know what direction to apply when the vertical carousel is used.</p>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+          <pre class="pre-scrollable">
+...
+Carousel.prototype.slide = function (type, next) {
+  var $active   = this.$element.find('.item.active')
+  var $next     = next || this.getItemForDirection(type, $active)
+  var isCycling = this.interval
+  var direction = type == 'next' ? ('horizontal' == this.options.layout ? 'left' : 'top') : ('horizontal' == this.options.layout ? 'right' : 'bottom')
+  var that      = this
+...
+          </pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <p class="text-justify">This function is used to find the div elements which has the class carousel to apply the respective plugin. I added the class carousel-vertical to properly initialize the custom carousel.</p>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+          <pre class="pre-scrollable">
+...
+var clickHandler = function (e) {
+  var href
+  var $this   = $(this)
+  var $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) // strip for ie7
+  if (!$target.hasClass('carousel') && !$target.hasClass('carousel-vertical')) return
+...
+          </pre>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
