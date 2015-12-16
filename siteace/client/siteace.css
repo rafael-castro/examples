@@ -1,0 +1,13 @@
+/* CSS declarations go here */
+
+body {
+  padding: 150px 0px 0px 0px;
+}
+
+.hidden_div{
+	display:none;
+}
+
+.row-content {
+  padding-bottom: 10px;
+}
